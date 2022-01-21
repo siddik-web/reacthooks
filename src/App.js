@@ -1,20 +1,43 @@
-import logo from './logo.svg';
-import './App.css';
-import { useState } from 'react';
+import { useState } from "react";
 
 function App() {
-  const [count, setCount] = useState(0);
-  const [obj, setObj] = useState({'name': ''})
+  const [todos, setTodos] = useState([]);
+  const handelClick = (e) => {
+    e.preventDefault();
+    const task = document.querySelector("#task");
+    if (task.value !== "") {
+      todos.push({ text: task.value});
+      setTodos([...todos], todos);
+    }
+    task.value = "";
+  };
+
   return (
-    <div className="App">
+    <div className="container">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <h2>useState Example</h2>
-        <p>You Clicked the button {count} times.</p>
-        <button onClick={() => setCount(count + 1)}>Click me</button>
-        <h2>{obj.name}</h2>
-        <input type="text" value={obj.name} onChange={(e) => setObj({...obj, 'name': e.target.value})} />
+        <h2>Todo Example Using useState Hook</h2>
       </header>
+      <div className="row">
+        <div className="col-auto">
+          <input type="text" id="task" className="form-control" />
+        </div>
+        <div className="col-auto">
+          <button onClick={handelClick} className="btn btn-primary">
+            Add
+          </button>
+        </div>
+       
+      </div>
+      <ul className="list-unstyled">
+            {todos.map((todo, index) => {
+              return (
+                <li key={index}>
+                  <input type="checkbox" className="checked"/>
+                  {todo.text}
+                </li>
+              );
+            })}
+          </ul>
     </div>
   );
 }
