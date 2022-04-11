@@ -1,43 +1,29 @@
 import { useState } from "react";
+import List from "./components/List";
+import Search from "./components/Search";
+
+const lists = [
+  'Dhaka',
+  'Volvo',
+  'Nokia'
+];
 
 function App() {
-  const [todos, setTodos] = useState([]);
-  const handelClick = (e) => {
-    e.preventDefault();
-    const task = document.querySelector("#task");
-    if (task.value !== "") {
-      todos.push({ text: task.value});
-      setTodos([...todos], todos);
-    }
-    task.value = "";
-  };
+  const { name } = {name:"Md Siddiqur Rahman"};
+  const handelSearch = (e) => {
+    console.log(e.target.value);
+  }
 
+  const handelDelete = (index) =>{
+    console.log("first");
+    lists.splice(index);
+  }
+  console.log(lists);
   return (
     <div className="container">
-      <header className="App-header">
-        <h2>Todo Example Using useState Hook</h2>
-      </header>
-      <div className="row">
-        <div className="col-auto">
-          <input type="text" id="task" className="form-control" />
-        </div>
-        <div className="col-auto">
-          <button onClick={handelClick} className="btn btn-primary">
-            Add
-          </button>
-        </div>
-       
-      </div>
-      <ul className="list-unstyled">
-            {todos.map((todo, index) => {
-              return (
-                <li key={index}>
-                  <input type="checkbox" className="checked"/>
-                  {todo.text}
-                </li>
-              );
-            })}
-          </ul>
+      <h1>Hello { name }!</h1>
+      <Search onSearch={handelSearch}/>
+      <List lists={lists} onDelete={handelDelete}/>
     </div>
   );
 }
