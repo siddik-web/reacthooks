@@ -3,27 +3,32 @@ import List from "./components/List";
 import Search from "./components/Search";
 
 const lists = [
-  'Dhaka',
-  'Volvo',
-  'Nokia'
+ {id:1, name: "Dhaka"},
+ {id:2, name: "Syllhet"},
+ {id:3, name: "Chittagon"},
+ {id:4, name: "Rajshahi"},
 ];
 
 function App() {
-  const { name } = {name:"Md Siddiqur Rahman"};
+  const { name } = { name: "Md Siddiqur Rahman" };
+  const [list, setList] = useState(lists);
   const handelSearch = (e) => {
-    console.log(e.target.value);
+ 
   }
 
   const handelDelete = (index) =>{
-    console.log("first");
-    lists.splice(index);
+    console.log(index)
   }
-  console.log(lists);
+
+  const handelClick = (a) => {
+    alert(a);
+  }
+
   return (
     <div className="container">
-      <h1>Hello { name }!</h1>
+      <h1 onClick={() => handelClick(name)}>Hello { name }!</h1>
       <Search onSearch={handelSearch}/>
-      <List lists={lists} onDelete={handelDelete}/>
+      <List lists={list} onDelete={handelDelete}/>
     </div>
   );
 }
