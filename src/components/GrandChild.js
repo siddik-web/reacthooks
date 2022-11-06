@@ -1,6 +1,8 @@
-import React from "react";
+import React, { useContext } from "react";
+import { AppContext } from "../contexts/AppContext";
 
-function GrandChild({ setUsername }) {
+function GrandChild() {
+  const { setUsername } = useContext(AppContext);
   return (
     <>
       <p>GrandChild</p>
